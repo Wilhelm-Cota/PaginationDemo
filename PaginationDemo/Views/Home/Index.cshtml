@@ -1,0 +1,32 @@
+﻿@model PaginatedList<PaginationDemo.Models.Customer>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayName("Customer Id")</th>
+            <th>@Html.DisplayName("Company Name")</th>
+            <th>@Html.DisplayName("Contact Title")</th>
+            <th>@Html.DisplayName("Contact Name")</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var data in Model)
+        {
+            <tr>
+                <td>@data.CustomerId</td>
+                    <td>@data.CompanyName</td>
+                        <td>@data.ContactTitle</td>
+                            <td>@data.ContactName</td>
+            </tr>
+        }
+    </tbody>
+</table>
+@{
+    var prevDisabled = !Model.HasPreciousPage ? "disabled" : "";
+    var nextDisabled= !Model.HasNextPage ? "disabled" : "";
+}
+<a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex-1)" class="btn btn-outline-primary @prevDisabled">Previous</a>
+<a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex+1)" class="btn btn-outline-primary @nextDisabled">Next</a>
